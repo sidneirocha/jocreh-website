@@ -164,6 +164,21 @@
               <button class="pill pill-lime submit-button" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
               <p class="form-note" id="form-note" aria-live="polite"></p>
             </form>
+            <div class="form-feedback" id="form-feedback" hidden aria-live="polite">
+              <div class="feedback-icon" id="feedback-icon" aria-hidden="true">
+                <svg class="feedback-symbol feedback-symbol-success" viewBox="0 0 48 48" focusable="false">
+                  <path d="M10 25.5 19.5 35 38 13" />
+                </svg>
+                <svg class="feedback-symbol feedback-symbol-error" viewBox="0 0 48 48" focusable="false">
+                  <path d="m24 7 18 33H6L24 7Z" />
+                  <path d="M24 17v11" />
+                  <circle cx="24" cy="34" r="1.2" />
+                </svg>
+              </div>
+              <h3 id="feedback-title">Mensagem enviada com sucesso!</h3>
+              <p id="feedback-message">Obrigado pelo contato. Sua mensagem foi registrada.</p>
+              <button class="pill feedback-back" id="feedback-back" type="button">Enviar outra mensagem</button>
+            </div>
           </div>
           <img class="contact-image" src="./assets/contact-agent.webp" alt="Profissional de atendimento falando ao telefone" />
         </div>
