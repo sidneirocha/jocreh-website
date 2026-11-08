@@ -1,3 +1,20 @@
+document.documentElement.classList.add("js");
+
+const sectionRevealObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        sectionRevealObserver.unobserve(entry.target);
+      });
+    }, {threshold: 0.12, rootMargin: "0px 0px -8% 0px"})
+  : null;
+
+document.querySelectorAll("main > section:not(.hero)").forEach(section => {
+  if (sectionRevealObserver) sectionRevealObserver.observe(section);
+  else section.classList.add("is-visible");
+});
+
 const services = [
   { title: "Recepção", image: "./assets/service-recepcao.webp", alt: "Recepcionista atendendo uma visitante" },
   { title: "Limpeza Geral", image: "./assets/service-limpeza.webp", alt: "Profissional realizando serviço de limpeza" },
@@ -84,92 +101,36 @@ menuButton.addEventListener("click", () => {
 mobileNav.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeMenu(); });
 
-const framerConfig = {
-  siteId: "411c551f11d9a79c944a410e160a926b39c9e3f7d5f6317d7aa49164f0e22b7c",
-  hpNames: ["website", "company", "message", "subject", "title", "description", "feedback", "notes", "details", "remarks", "comments"]
+const turnstileConfig = {
+  sitekey: "0x4AAAAAAF4y4sjW3EKPV13O",
+  action: "contato"
 };
-const pageLoadedAt = Date.now();
+let turnstileToken = "";
+let turnstileWidget = null;
 
-function createFramerPow() {
-  const workerCode = `
-    async function sha256(value) {
-      const data = new TextEncoder().encode(value);
-      const digest = await crypto.subtle.digest("SHA-256", data);
-      return Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("");
-    }
-    function randomToken(length) {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      let token = "";
-      for (let i = 0; i < length; i++) token += chars.charAt(Math.floor(Math.random() * chars.length));
-      return token;
-    }
-    self.addEventListener("message", async event => {
-      const {salt, difficulty, tokenLength, maxTime} = event.data;
-      const prefix = "0".repeat(difficulty);
-      const start = performance.now();
-      while (performance.now() - start <= maxTime) {
-        const secret = Date.now() + ":" + randomToken(tokenLength);
-        const hash = await sha256(salt + secret);
-        if (hash.startsWith(prefix)) {
-          self.postMessage({success: true, secret, hash});
-          return;
-        }
-      }
-      self.postMessage({success: false});
-    });
-  `;
-  return new Promise((resolve, reject) => {
-    const blobUrl = URL.createObjectURL(new Blob([workerCode], {type: "application/javascript"}));
-    const worker = new Worker(blobUrl);
-    const timeout = window.setTimeout(() => {
-      worker.terminate();
-      URL.revokeObjectURL(blobUrl);
-      reject(new Error("Não foi possível validar a proteção antispam."));
-    }, 11000);
-    worker.addEventListener("message", event => {
-      window.clearTimeout(timeout);
-      worker.terminate();
-      URL.revokeObjectURL(blobUrl);
-      if (event.data.success) resolve(event.data);
-      else reject(new Error("Não foi possível validar a proteção antispam."));
-    }, {once: true});
-    worker.addEventListener("error", error => {
-      window.clearTimeout(timeout);
-      worker.terminate();
-      URL.revokeObjectURL(blobUrl);
-      reject(error);
-    }, {once: true});
-    worker.postMessage({salt: "framer", difficulty: 3, tokenLength: 30, maxTime: 10000});
+function initTurnstile() {
+  const container = document.querySelector("#turnstile-widget");
+  if (!container || !window.turnstile || turnstileWidget !== null) return;
+  turnstileWidget = window.turnstile.render(container, {
+    sitekey: turnstileConfig.sitekey,
+    action: turnstileConfig.action,
+    theme: "light",
+    callback: token => { turnstileToken = token; },
+    "expired-callback": () => { turnstileToken = ""; },
+    "error-callback": () => { turnstileToken = ""; }
   });
 }
 
-function appendUtmTags(formData) {
-  try {
-    const match = document.cookie.match(/(^|;) ?framerFormsUTMTags=([^;]*)(;|$)/);
-    if (!match?.[2]) return;
-    const tags = JSON.parse(decodeURIComponent(match[2]));
-    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"].forEach(key => {
-      if (typeof tags?.[key] === "string") formData.append(key, tags[key]);
-    });
-  } catch {}
-}
+window.initTurnstile = initTurnstile;
+const turnstileScript = document.createElement("script");
+turnstileScript.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=initTurnstile&render=explicit";
+turnstileScript.async = true;
+turnstileScript.defer = true;
+document.head.appendChild(turnstileScript);
 
-function appendFramerSpamMetadata(formData) {
-  const filled = [];
-  for (const name of framerConfig.hpNames) {
-    const fieldName = `__framer_${name}`;
-    const value = formData.get(fieldName) || "";
-    formData.delete(fieldName);
-    if (value) {
-      filled.push(JSON.stringify({0: name, 1: value, 2: false, 3: false, 4: false, 5: "0.00", 6: false}));
-    }
-  }
-  formData.append("__framer_fieldData", `[${filled.join(",")}]`);
-  formData.append("__framer_fieldCount", String(framerConfig.hpNames.length));
-  formData.append("__framer_fieldFilledCount", String(filled.length));
-  formData.append("__framer_hpVersion", "3");
-  formData.append("__framer_siteId", framerConfig.siteId);
-  formData.append("__framer_timeToSubmissionSinceModuleLoad", ((Date.now() - pageLoadedAt) / 1000).toFixed(2));
+function createRequestId() {
+  if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
 }
 
 document.querySelector("#contact-form").addEventListener("submit", async event => {
@@ -178,37 +139,52 @@ document.querySelector("#contact-form").addEventListener("submit", async event =
   const note = document.querySelector("#form-note");
   const button = form.querySelector(".submit-button");
   if (!form.reportValidity() || button.disabled) return;
+  if (!turnstileToken) {
+    note.textContent = "Confirme a verificação antispam para continuar.";
+    return;
+  }
+
+  const formData = new FormData(form);
+  const payload = {
+    nome: formData.get("Name"),
+    email: formData.get("Email Address"),
+    servico: formData.get("Service"),
+    mensagem: formData.get("Message"),
+    website: formData.get("website") || "",
+    requestId: createRequestId(),
+    turnstileToken
+  };
+
   button.disabled = true;
   button.setAttribute("aria-busy", "true");
   note.textContent = "Enviando mensagem…";
   try {
-    const pow = await createFramerPow();
-    const data = new FormData(form);
-    appendFramerSpamMetadata(data);
-    appendUtmTags(data);
-    for (const [key, value] of data) if (value instanceof File) data.delete(key);
     const response = await fetch(form.action, {
       method: "POST",
-      body: data,
       headers: {
-        "Framer-Site-Id": framerConfig.siteId,
-        "Framer-POW": pow.secret,
-        "Framer-Form-Fields": Array.from(data.keys()).map(encodeURIComponent).join(",")
-      }
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload),
+      credentials: "omit",
+      redirect: "follow"
     });
     if (!response.ok) {
-      let detail = "";
-      try { detail = (await response.json())?.error?.message || ""; } catch {}
-      throw new Error(detail || "O envio não foi aceito pelo serviço de formulários.");
+      throw new Error("O envio não foi aceito pelo serviço de formulários.");
     }
+    const result = await response.json();
+    if (result.ok !== true) throw new Error(result.message || "Não foi possível enviar a mensagem.");
     note.textContent = "Mensagem enviada. Obrigado pelo contato!";
     form.reset();
   } catch (error) {
     console.error("Jocreh form submission failed", error);
     note.textContent = error instanceof TypeError
-      ? "Não foi possível conectar ao formulário da Jocreh a partir deste domínio."
+      ? "Não foi possível conectar ao serviço de formulários."
       : error.message || "Não foi possível enviar a mensagem. Tente novamente.";
   } finally {
+    if (window.turnstile && turnstileWidget !== null) {
+      window.turnstile.reset(turnstileWidget);
+      turnstileToken = "";
+    }
     button.disabled = false;
     button.removeAttribute("aria-busy");
   }

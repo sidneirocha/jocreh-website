@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#0b3d2a" />
     <meta name="description" content="Locação de equipamentos médicos e veterinários, equipes especializadas e soluções para empresas." />
     <title>Jocreh Soluções</title>
+    <link rel="icon" href="./assets/fav.svg" type="image/svg+xml" />
     <link rel="preload" href="./fonts/hedvig-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="./fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./styles.css" />
@@ -60,7 +61,7 @@
         </div>
         <div class="about-row">
           <div class="about-mark" aria-label="Jocreh Soluções">
-            <img src="./assets/logo-vertical.svg" alt="Jocreh Soluções" />
+            <img class="about-logo" src="./assets/logo-vertical.svg" alt="Jocreh Soluções" />
           </div>
           <div class="about-copy">
             <p>A Jocreh Soluções é o seu parceiro estratégico para garantir a eficiência, segurança e, principalmente, a excelência operacional em ambientes de saúde e empresariais.</p>
@@ -128,7 +129,7 @@
           <div class="contact-copy">
             <div class="eyebrow eyebrow-light"><span></span>Contato</div>
             <h2>Entre em contato</h2>
-            <form class="contact-form" id="contact-form" action="https://api.framer.com/forms/v1/forms/9e9647bf-f9d4-4e4f-89fb-a71236786b30/submit" method="post">
+            <form class="contact-form" id="contact-form" action="https://script.google.com/macros/s/AKfycbxtNm-THE7RObzhihG-CxOOgLR6GJqhMO-vcYwvFSM_O3baRZhqgXB0XqCd12cr_BtH/exec" method="post">
               <div class="form-row">
                 <label><span class="sr-only">Nome</span><input name="Name" autocomplete="name" placeholder="Nome" required /></label>
                 <label><span class="sr-only">E-mail</span><input name="Email Address" type="email" autocomplete="email" placeholder="E-mail" required /></label>
@@ -147,7 +148,7 @@
               </label>
               <label><span class="sr-only">Como podemos te ajudar?</span><textarea name="Message" placeholder="Como podemos te ajudar hoje?" rows="4" required></textarea></label>
               <div class="honeypots" aria-hidden="true">
-                <input type="text" name="__framer_website" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="website" tabindex="-1" autocomplete="one-time-code" />
                 <input type="text" name="__framer_company" tabindex="-1" autocomplete="one-time-code" />
                 <input type="text" name="__framer_message" tabindex="-1" autocomplete="one-time-code" />
                 <input type="text" name="__framer_subject" tabindex="-1" autocomplete="one-time-code" />
@@ -159,6 +160,7 @@
                 <input type="text" name="__framer_remarks" tabindex="-1" autocomplete="one-time-code" />
                 <input type="text" name="__framer_comments" tabindex="-1" autocomplete="one-time-code" />
               </div>
+              <div class="turnstile-widget" id="turnstile-widget" aria-label="Verificação antispam"></div>
               <button class="pill pill-lime submit-button" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
               <p class="form-note" id="form-note" aria-live="polite"></p>
             </form>
