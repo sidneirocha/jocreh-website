@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b3d2a" />
+    <meta name="description" content="Locação de equipamentos médicos e veterinários, equipes especializadas e soluções para empresas." />
+    <title>Jocreh Soluções</title>
+    <link rel="preload" href="./fonts/hedvig-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#hero" aria-label="Jocreh Soluções, início">
+        <img src="./assets/logo-jocreh.jpg" alt="Jocreh Soluções" />
+      </a>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#empresa">A Empresa</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+13996112260">(13) 99611-2260</a>
+        <a class="header-contact" href="#contato">Contato <span aria-hidden="true">→</span></a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span>
+      </button>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação móvel" hidden>
+        <a href="#empresa">A Empresa</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#contato">Contato</a>
+        <a href="tel:+13996112260">(13) 99611-2260</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <h1>Soluções em equipamentos para saúde humana e animal</h1>
+            <p>Seu parceiro em locação de equipamentos e excelência operacional para saúde e negócios.</p>
+            <a class="pill pill-lime" href="#contato">Solicite um orçamento <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-visual">
+            <img class="hero-person" src="./assets/hero-director.webp" alt="Profissional da Jocreh Soluções" />
+            <div class="proof proof-team"><span class="check-mark">✓</span> Equipe profissional e especializada</div>
+            <div class="proof proof-clients"><span class="star-mark">☆</span> Clientes 100% satisfeitos</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section-wash" id="empresa">
+        <div class="section-heading">
+          <div class="eyebrow"><span></span>A Empresa</div>
+          <h2>Jocreh Soluções: tecnologia de ponta e suporte humano essencial.</h2>
+        </div>
+        <div class="about-row">
+          <div class="about-mark" aria-label="Jocreh Soluções">
+            <div class="about-letters">JC</div>
+            <div class="about-wordmark">JOCREH<br />SOLUÇÕES</div>
+          </div>
+          <div class="about-copy">
+            <p>A Jocreh Soluções é o seu parceiro estratégico para garantir a eficiência, segurança e, principalmente, a excelência operacional em ambientes de saúde e empresariais.</p>
+            <p>Nosso principal foco é a locação de equipamentos médicos e veterinários. Entendemos a necessidade de clínicas e hospitais operarem com tecnologia de última geração, e oferecemos a flexibilidade da locação para que você foque no atendimento, sem o alto custo da aquisição.</p>
+            <p>Complementamos este portfólio com serviços vitais: fornecimento de mão de obra especializada para setores críticos como clínicas veterinárias e pronto-socorros (humanos), além de soluções de infraestrutura como manutenção de ar-condicionado.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="services" id="servicos">
+        <div class="section-heading">
+          <div class="eyebrow"><span></span>Serviços</div>
+          <h2>Soluções Jocreh: o suporte que faz a diferença.</h2>
+        </div>
+        <div class="carousel" aria-label="Serviços Jocreh">
+          <div class="carousel-track" id="carousel-track"></div>
+          <button class="carousel-arrow previous" type="button" aria-label="Serviço anterior"><img src="./assets/arrow-left.svg" alt="" /></button>
+          <button class="carousel-arrow next" type="button" aria-label="Próximo serviço"><img src="./assets/arrow-right.svg" alt="" /></button>
+          <div class="carousel-dots" id="carousel-dots" aria-label="Escolha um serviço"></div>
+        </div>
+      </section>
+
+      <section class="reassurance">
+        <h2>Garanta segurança e tranquilidade com<br class="desktop-break" /> os serviços da Jocreh</h2>
+        <p>Com a excelência da nossa portaria, garantimos controle de acesso rigoroso<br class="desktop-break" /> e proteção do seu patrimônio.</p>
+        <a class="pill pill-lime" href="#contato">Solicite um orçamento <span aria-hidden="true">→</span></a>
+      </section>
+
+      <section class="differentials section-wash" id="diferenciais">
+        <div class="section-heading">
+          <div class="eyebrow"><span></span>Diferenciais</div>
+          <h2>Nossos diferenciais</h2>
+        </div>
+        <div class="differential-grid">
+          <article class="differential-card"><div class="jc-icon" aria-hidden="true">JC</div><h3>Compromisso</h3><p>Compromisso com a qualidade e excelência nos serviços prestados, buscando sempre a satisfação total do cliente.</p></article>
+          <article class="differential-card"><div class="jc-icon" aria-hidden="true">JC</div><h3>Equipe</h3><p>Equipe de limpeza altamente treinada, com conhecimento em técnicas e produtos de limpeza eficientes.</p></article>
+          <article class="differential-card"><div class="jc-icon" aria-hidden="true">JC</div><h3>Suporte</h3><p>Suporte e atendimento 24 horas para solucionar qualquer problema relacionado ao controle de acesso ou limpeza.</p></article>
+          <article class="differential-card"><div class="jc-icon" aria-hidden="true">JC</div><h3>Flexibilidade</h3><p>Planos de locação e serviços adaptados à demanda e ao porte exato da sua operação.</p></article>
+          <article class="differential-card"><div class="jc-icon" aria-hidden="true">JC</div><h3>Produtos</h3><p>Utilização de produtos e equipamentos de qualidade, visando a conservação dos ambientes.</p></article>
+          <article class="differential-card"><div class="jc-icon" aria-hidden="true">JC</div><h3>Excelência na Locação</h3><p>Equipamentos de última geração, certificados e submetidos a rigorosos protocolos de manutenção.</p></article>
+        </div>
+      </section>
+
+      <section class="coverage" id="atuacao">
+        <div class="section-heading">
+          <div class="eyebrow"><span></span>Atuação</div>
+          <h2>Onde atuamos?</h2>
+        </div>
+        <div class="coverage-panel">
+          <img src="./assets/clinic.webp" alt="Interior de uma clínica médica" />
+          <ul>
+            <li>Indústrias</li>
+            <li>Clínicas Veterinárias</li>
+            <li>Hospitais</li>
+            <li>Condomínios residenciais e comerciais</li>
+            <li>Educação</li>
+            <li>Saúde</li>
+            <li>Shopping Centers</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="contact" id="contato">
+        <div class="contact-inner">
+          <div class="contact-copy">
+            <div class="eyebrow eyebrow-light"><span></span>Contato</div>
+            <h2>Entre em contato</h2>
+            <form class="contact-form" id="contact-form" action="https://api.framer.com/forms/v1/forms/9e9647bf-f9d4-4e4f-89fb-a71236786b30/submit" method="post">
+              <div class="form-row">
+                <label><span class="sr-only">Nome</span><input name="Name" autocomplete="name" placeholder="Nome" required /></label>
+                <label><span class="sr-only">E-mail</span><input name="Email Address" type="email" autocomplete="email" placeholder="E-mail" required /></label>
+              </div>
+              <label><span class="sr-only">Assunto</span>
+                <select name="Service" aria-label="Assunto" required>
+                  <option>Recepção</option>
+                  <option>Manutenção</option>
+                  <option>Locação de equipamentos médicos</option>
+                  <option>Limpeza Geral</option>
+                  <option>Controle de Acesso</option>
+                  <option>Estacionamento</option>
+                  <option>Equipe para clínicas e hospitias</option>
+                  <option>Manutenção de ar condicionado</option>
+                </select>
+              </label>
+              <label><span class="sr-only">Como podemos te ajudar?</span><textarea name="Message" placeholder="Como podemos te ajudar hoje?" rows="4" required></textarea></label>
+              <div class="honeypots" aria-hidden="true">
+                <input type="text" name="__framer_website" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_company" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_message" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_subject" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_title" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_description" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_feedback" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_notes" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_details" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_remarks" tabindex="-1" autocomplete="one-time-code" />
+                <input type="text" name="__framer_comments" tabindex="-1" autocomplete="one-time-code" />
+              </div>
+              <button class="pill pill-lime submit-button" type="submit">Enviar mensagem <span aria-hidden="true">→</span></button>
+              <p class="form-note" id="form-note" aria-live="polite"></p>
+            </form>
+          </div>
+          <img class="contact-image" src="./assets/contact-agent.webp" alt="Profissional de atendimento falando ao telefone" />
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a href="#hero" aria-label="Jocreh Soluções, início"><img src="./assets/logo-jocreh.jpg" alt="Jocreh Soluções" /></a>
+          <p>Solução em locação de<br /> equipamentos hospitalares</p>
+        </div>
+        <div class="footer-links">
+          <div><h2>Menu</h2><a href="#empresa">A Empresa</a><a href="#servicos">Serviços</a><a href="#diferenciais">Diferenciais</a></div>
+          <div><h2>Contato</h2><a href="mailto:contato@jocreh.com.br">contato@jocreh.com.br</a><a href="tel:+13996112260">13 99611-2260</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>Todos os direitos reservados a Jocreh Soluções @ 2025</span><a href="https://haus.art.br/" target="_blank" rel="noreferrer">Desenvolvido por Haus.art.br</a></div>
+    </footer>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
