@@ -133,6 +133,50 @@ function createRequestId() {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`;
 }
 
+const feedback = {
+  panel: document.querySelector("#form-feedback"),
+  title: document.querySelector("#feedback-title"),
+  message: document.querySelector("#feedback-message"),
+  back: document.querySelector("#feedback-back")
+};
+
+function showFeedback(success, title, message) {
+  feedback.panel.classList.toggle("is-success", success);
+  feedback.panel.classList.toggle("is-error", !success);
+  feedback.title.textContent = title;
+  feedback.message.textContent = message;
+  feedback.back.textContent = success ? "Enviar outra mensagem" : "Voltar ao formulário";
+  feedback.panel.dataset.success = String(success);
+  document.querySelector("#form-note").textContent = "";
+  document.querySelector("#contact-form").hidden = true;
+  feedback.panel.hidden = false;
+}
+
+feedback.back.addEventListener("click", () => {
+  const form = document.querySelector("#contact-form");
+  if (feedback.panel.dataset.success === "true") form.reset();
+  feedback.panel.hidden = true;
+  form.hidden = false;
+  form.querySelector("input[name='Name']").focus();
+});
+
+function loadFeedbackPreview() {
+  if (!(location.hostname === "localhost" || location.hostname === "127.0.0.1")) return;
+
+  const state = new URLSearchParams(location.search).get("feedback");
+  if (state === "success") {
+    showFeedback(true, "Mensagem enviada com sucesso!", "Obrigado pelo contato. Sua mensagem foi registrada.");
+  } else if (state === "error") {
+    showFeedback(false, "Não foi possível enviar", "Não conseguimos concluir o envio. Tente novamente em instantes.");
+  } else {
+    return;
+  }
+
+  document.querySelector("#contato")?.scrollIntoView({block: "start"});
+}
+
+loadFeedbackPreview();
+
 document.querySelector("#contact-form").addEventListener("submit", async event => {
   event.preventDefault();
   const form = event.currentTarget;
@@ -140,7 +184,7 @@ document.querySelector("#contact-form").addEventListener("submit", async event =
   const button = form.querySelector(".submit-button");
   if (!form.reportValidity() || button.disabled) return;
   if (!turnstileToken) {
-    note.textContent = "Confirme a verificação antispam para continuar.";
+    showFeedback(false, "Verificação necessária", "Confirme a verificação antispam para continuar.");
     return;
   }
 
@@ -173,13 +217,11 @@ document.querySelector("#contact-form").addEventListener("submit", async event =
     }
     const result = await response.json();
     if (result.ok !== true) throw new Error(result.message || "Não foi possível enviar a mensagem.");
-    note.textContent = "Mensagem enviada. Obrigado pelo contato!";
+    showFeedback(true, "Mensagem enviada com sucesso!", "Obrigado pelo contato. Sua mensagem foi registrada.");
     form.reset();
   } catch (error) {
     console.error("Jocreh form submission failed", error);
-    note.textContent = error instanceof TypeError
-      ? "Não foi possível conectar ao serviço de formulários."
-      : error.message || "Não foi possível enviar a mensagem. Tente novamente.";
+    showFeedback(false, "Não foi possível enviar", "Não conseguimos concluir o envio. Tente novamente em instantes.");
   } finally {
     if (window.turnstile && turnstileWidget !== null) {
       window.turnstile.reset(turnstileWidget);
