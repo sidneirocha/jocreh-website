@@ -8,12 +8,12 @@ a{color:inherit;text-decoration:none}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 .site-header{height:82px;position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:0 max(6vw,32px);background:rgba(250,252,250,.97);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(10,44,28,.035)}
-.brand img{display:block;width:210px;height:62px;object-fit:cover;object-position:center;mix-blend-mode:multiply}
+.brand img{display:block;width:200px;height:auto;max-height:62px;object-fit:contain}
 .desktop-nav{display:flex;gap:32px;margin-left:26px}
 .desktop-nav a,.header-phone{font-size:14px;color:#3d4b42;transition:color .2s}
 .desktop-nav a:hover,.footer-links a:hover{color:var(--green)}
 .header-actions{display:flex;align-items:center;gap:28px}
-.header-contact{height:42px;min-width:144px;border-radius:30px;background:var(--forest);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:4px 5px 4px 19px;font-size:14px}
+.header-contact{height:42px;min-width:136px;border-radius:30px;background:var(--forest);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:4px 5px 4px 16px;font-size:14px}
 .header-contact span,.pill span{display:grid;place-items:center;border:1px solid currentColor;border-radius:50%;width:33px;height:33px;font-size:21px;line-height:1;transition:transform .2s}
 .header-contact:hover span,.pill:hover span{transform:translateX(2px)}
 .menu-toggle,.mobile-nav{display:none}
@@ -25,7 +25,7 @@ h1,h2,h3,p{margin-top:0}
 h1,h2,.service-title{font-family:var(--serif);font-weight:400;letter-spacing:-.035em}
 .hero h1{max-width:660px;margin-bottom:28px;font-size:clamp(42px,4.1vw,58px);line-height:1.13}
 .hero-copy p{max-width:525px;margin-bottom:38px;font-size:20px;line-height:1.55;color:rgba(255,255,255,.82)}
-.pill{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;border:0;border-radius:40px;padding:5px 6px 5px 20px;font-size:15px;transition:filter .2s,transform .2s}
+.pill{display:inline-flex;align-items:center;justify-content:space-between;gap:14px;border:0;border-radius:40px;padding:4px 5px 4px 19px;font-size:15px;transition:filter .2s,transform .2s}
 .pill:hover{filter:brightness(1.05);transform:translateY(-1px)}
 .pill-lime{background:var(--lime);color:#17442b}
 .pill span{font-size:22px}
@@ -42,9 +42,8 @@ h1,h2,.service-title{font-family:var(--serif);font-weight:400;letter-spacing:-.0
 .about{min-height:588px;padding:100px 24px 92px}
 .about .section-heading h2{max-width:680px}
 .about-row{max-width:800px;margin:44px auto 0;display:grid;grid-template-columns:235px 1fr;gap:68px;align-items:center}
-.about-mark{color:#176438;display:grid;grid-template-columns:1fr;justify-items:center;line-height:1;min-width:210px}
-.about-letters{font-family:var(--serif);font-size:126px;letter-spacing:-.1em;line-height:.9;border-bottom:5px solid #176438;padding:0 5px 10px 0}
-.about-wordmark{font-family:var(--serif);font-size:18px;line-height:1.05;justify-self:end;margin-right:27px;margin-top:8px}
+.about-mark{display:flex;align-items:center;justify-content:center;min-width:210px}
+.about-mark img{display:block;width:180px;height:auto}
 .about-copy{font-size:14px;font-weight:350;line-height:1.6;color:#37483c}
 .about-copy p{margin:0 0 17px}.about-copy p:last-child{margin-bottom:0}
 .services{min-height:670px;background:#fafafa;padding:84px 0 70px;overflow:hidden}
@@ -109,7 +108,7 @@ h1,h2,.service-title{font-family:var(--serif);font-weight:400;letter-spacing:-.0
 .form-note{min-height:18px;color:#b8ff9d;font-size:12px;margin:0}
 .site-footer{padding:36px max(7.2vw,32px) 21px;background:#fff;color:#26342b}
 .footer-main{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:40px;min-height:170px}
-.footer-brand img{width:150px;height:48px;object-fit:cover;object-position:center;mix-blend-mode:multiply}
+.footer-brand img{display:block;width:150px;height:auto}
 .footer-brand p{margin:16px 0 0;font-size:13px;color:#657267;line-height:1.5}
 .footer-links{display:flex;gap:76px;margin-right:28px}
 .footer-links h2{font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:0;margin:5px 0 18px;color:#35423a}
